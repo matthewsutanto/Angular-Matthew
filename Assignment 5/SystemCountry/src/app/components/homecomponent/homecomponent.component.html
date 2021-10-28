@@ -1,0 +1,24 @@
+<table class="center">
+  <tr>
+    <td colspan="3"><h3>Three Most Populated Countries</h3></td>
+  </tr>
+  <tr>
+    <td *ngFor="let country of sortedCountryPol; let i = index">
+      <div class="box" (click)="viewCountryDetail(country)">
+        {{ country.name }} <br />
+        Capital : {{ country.capital }}
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3"><h3>Three Largest Countries (Area)</h3></td>
+  </tr>
+  <tr>
+    <td *ngFor="let country of sortedCountryLar; let i = index">
+      <div class="box2" (click)="viewCountryDetail(country)">
+        {{ country.name }} <br />
+        Capital : {{ country.capital }}
+      </div>
+    </td>
+  </tr>
+</table>

@@ -9,9 +9,9 @@ import { Country } from './models/Country';
 export class AppComponent implements OnInit{
   title = 'SystemCountry';
   countryData:Country[]=[];
-  isAllCountryShown:boolean=true;
+  isAllCountryShown:boolean=false;
   isCountryDetail:boolean=false;
-  isHomepage:boolean=false;
+  isHomepage:boolean=true;
   fromPage:string="";
   countryDetail:Country={
     name:"United States",

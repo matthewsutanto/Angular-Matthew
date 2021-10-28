@@ -1,0 +1,9 @@
+<h3>List all of the country in Database</h3>
+<div class="root">
+    <div *ngFor="let country of countries; let i=index">
+        <div class="box" (click)="viewCountryDetail(country)">
+             {{country.name}} <br>
+             Capital : {{country.capital}}
+         </div>
+     </div>
+</div>

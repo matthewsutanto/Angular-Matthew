@@ -1,16 +1,21 @@
-.container{
-    margin-top: 20px;
-    margin-left: 8%;
-    margin-right: 8%;
+.root{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 70%;
+    margin-left: 15%;
+    /* margin-top: 20px;
+    
     margin-bottom: 20px;
     padding-left: 10%;
-    padding-right: 10%;
+    padding-right: 10%; */
 }
+
 h3{
     text-align: center;
 }
 .box{
-  background-color: brown;
+  background-color: green;
   width: 220px;
   height: 90px;
   padding: 20px;
