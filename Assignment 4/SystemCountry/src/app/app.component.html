@@ -1,0 +1,13 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+      <a class="navbar-brand" style="text-align:center" href="#">Fun Facts About Countries</a>
+  </div>
+</nav>
+
+<div class="container-fluid">
+    <button (click)=goHomepage()>Go back to Homepage</button>
+    <button (click)=goAllCountry()>List of all Countries</button>
+</div>
+<app-homecomponent *ngIf="isHomepage" (newItemEventHome) = "openDetailCountryHome($event)" [multiCountry] = "countryData"></app-homecomponent>
+<app-all-countries-component *ngIf="isAllCountryShown" (newItemEvent) = "openDetailCountry($event)" [countries] = "countryData"></app-all-countries-component>
+<app-country-detail-component *ngIf="isCountryDetail" (goBackEmiter)= "goBackEvent()" [country]="countryDetail"></app-country-detail-component>

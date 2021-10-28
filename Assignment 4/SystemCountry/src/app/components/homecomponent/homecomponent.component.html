@@ -1,0 +1,16 @@
+<h3>Three Most Populated Countries</h3>
+<div class="container" *ngFor="let country of sortedCountryPol; let i=index">
+   <div class="box" (click)="viewCountryDetail(country)">
+        {{country.name}} <br>
+        Capital : {{country.capital}}
+    </div>
+</div>
+
+<br>
+<h3>Three Largest Countries (Area)</h3>
+<div class="container2" *ngFor="let country of sortedCountryLar; let i=index">
+   <div class="box2" (click)="viewCountryDetail(country)">
+        {{country.name}} <br>
+        Capital : {{country.capital}}
+    </div>
+</div>

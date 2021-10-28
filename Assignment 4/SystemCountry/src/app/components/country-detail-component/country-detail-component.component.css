@@ -1,0 +1,9 @@
+.countryDetail{
+    width: 50%;
+    margin-left: 40%;
+    margin-right: 40%;
+}
+th{
+    width: 150px;
+    color: green;
+}
