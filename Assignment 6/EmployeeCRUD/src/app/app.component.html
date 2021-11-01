@@ -1,0 +1,6 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm"><app-form-employee (newEmpEvent) = "updateTable()" [updateEmployee] = "employee"></app-form-employee></div>
+    <div class="col-sm"><app-employee-table (newDeleteEvent) = "deleteEmpEvent()" (newUpdateEmpEvent) = "updateEmpEvent($event)" (newUpdateTableEvent) = "updateTableFinish()" [isUpdate] = "signUpdate"></app-employee-table></div>
+  </div>
+</div>
