@@ -8,12 +8,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormEmployeeComponent } from './components/form-employee/form-employee.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeTableComponent,
-    FormEmployeeComponent
+    FormEmployeeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     MatDialogModule,
     MatFormFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

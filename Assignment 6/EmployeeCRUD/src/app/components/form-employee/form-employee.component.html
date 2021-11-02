@@ -1,78 +1,157 @@
-<form [formGroup]="employeeForm" (ngSubmit)="inputEmployee()">
-    <div class="row">
-        <div class="col-sm">
-            <div class="form-floating mb-3">
-                <input type="text" formControlName="firstName" class="form-control" name="floatingFName" id="floatingFName" placeholder="FName">
-                <label for="floatingFName">First Name</label>
-            </div>
-        </div>
+<form [formGroup]="employeeForm" (ngSubmit)="inputEmployee(content)">
+  <div class="row">
+    <div class="col-sm">
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          formControlName="firstName"
+          class="form-control"
+          name="floatingFName"
+          id="floatingFName"
+          placeholder="FName"
+        />
+        <label for="floatingFName">First Name</label>
+      </div>
 
-        <div class="col-sm">
-            <div class="form-floating mb-3">
-                <input type="text" formControlName="lastName" class="form-control" name="floatingLName" id="floatingLName" placeholder="LName">
-                <label for="floatingLName">Last Name</label>
-            </div>
-        </div>
+      <div class="alert" *ngIf="fName && fName.touched && fName.invalid">
+          <span style="color: red;" >Username input is error</span>
+      </div>
     </div>
 
-    <div class="row">
-        <div class="col-sm">
-            <div class="form-floating mb-3">
-                <input type="text" formControlName="title" class="form-control" name="floatingTitle" id="floatingTitle" placeholder="Title">
-                <label for="floatingTitle">Title</label>
-            </div>
-        </div>
+    <div class="col-sm">
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          formControlName="lastName"
+          class="form-control"
+          name="floatingLName"
+          id="floatingLName"
+          placeholder="LName"
+        />
+        <label for="floatingLName">Last Name</label>
+      </div>
+    </div>
+  </div>
 
-        <div class="col-sm">
-            <div class="form-floating mb-3">
-                <select
-                    class="form-select form-select-sm"
-                    name="categoryOption"
-                    id="categoryOption"
-                    formControlName="Role"
-                    aria-label="Default select example">
-
-                    <option value="" selected="selected">--Choose Role</option>
-                    <option value="Admin">Admin</option>
-                    <option value="User">User</option>
-                </select>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-sm">
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          formControlName="title"
+          class="form-control"
+          name="floatingTitle"
+          id="floatingTitle"
+          placeholder="Title"
+        />
+        <label for="floatingTitle">Title</label>
+      </div>
     </div>
 
-    <div class="row">
-        <div class="form-floating mb-3">
-            <input type="text" formControlName="email" class="form-control" name="floatingEmail" id="floatingEmail" placeholder="Email">
-            <label for="floatingEmail">Email</label>
-        </div>
+    <div class="col-sm">
+      <div class="form-floating mb-3">
+        <select
+          class="form-select form-select-sm"
+          name="categoryOption"
+          id="categoryOption"
+          formControlName="Role"
+          aria-label="Default select example"
+        >
+          <option value="" selected="selected">--Choose Role</option>
+          <option value="Admin">Admin</option>
+          <option value="User">User</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        formControlName="email"
+        class="form-control"
+        name="floatingEmail"
+        id="floatingEmail"
+        placeholder="Email"
+      />
+      <label for="floatingEmail">Email</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm">
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          formControlName="password"
+          class="form-control"
+          name="floatingPass"
+          id="floatingPass"
+          placeholder="Pass"
+        />
+        <label for="floatingPass">Password</label>
+      </div>
     </div>
 
-    <div class="row">
+    <div class="col-sm">
+      <div class="form-floating mb-3">
         <div class="col-sm">
-            <div class="form-floating mb-3">
-                <input type="text" formControlName="password" class="form-control" name="floatingPass" id="floatingPass" placeholder="Pass">
-                <label for="floatingPass">Password</label>
-            </div>
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              formControlName="confirmPassword"
+              class="form-control"
+              name="floatingPassCon"
+              id="floatingPassCon"
+              placeholder="PassCon"
+            />
+            <label for="floatingPassCon">Password Confirm</label>
+          </div>
         </div>
-
-        <div class="col-sm">
-            <div class="form-floating mb-3">
-                <div class="col-sm">
-                    <div class="form-floating mb-3">
-                        <input type="text" formControlName="confirmPassword" class="form-control" name="floatingPassCon" id="floatingPassCon" placeholder="PassCon">
-                        <label for="floatingPassCon">Password Confirm</label>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="row">
-        <div class="col-sm">
-            <input type="submit" id="submitForm" value="{{btnName}}" class="btn btn-primary" />    
-        </div>
-        <!-- <div class="col-sm">
+  <div class="row">
+    <div class="col-sm">
+      <input
+        type="submit"
+        id="submitForm"
+        value="{{ btnName }}"
+        class="btn btn-primary"
+        [disabled] ="!employeeForm.valid"
+      />
+    </div>
+    <!-- <div class="col-sm">
             <input type="submit" id="submitForm" value="{{btnName}}" class="btn btn-primary" />    
         </div> -->
-    </div>
+  </div>
 </form>
+<!-- <ngbd-modal-basic></ngbd-modal-basic> -->
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirmation Box</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h1>Are you sure want to {{btnName}} ?</h1>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Save click')"
+    >
+      Yes {{btnName}}
+    </button>
+  </div>
+</ng-template>

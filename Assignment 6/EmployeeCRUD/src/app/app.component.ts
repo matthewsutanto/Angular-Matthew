@@ -24,7 +24,6 @@ export class AppComponent {
 
   updateTable() {
     this.signUpdate =  true;
-    
   }
 
   updateTableFinish(){
@@ -46,6 +45,11 @@ export class AppComponent {
   }
 
   deleteEmpEvent(){
+    console.log("halo ada disini")
+    this.signDelete = true;
+  }
 
+  finishDelete(){
+    this.signDelete = false;
   }
 }
