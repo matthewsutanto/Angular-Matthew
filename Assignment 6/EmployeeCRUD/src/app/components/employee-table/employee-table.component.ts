@@ -1,9 +1,9 @@
-import { Component, Input, OnInit, SimpleChange, Output, EventEmitter } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Employee } from 'src/app/Modules/Employee';
 import { EmployeeServiceService } from 'src/app/services/employee-service.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-employee-table',
   templateUrl: './employee-table.component.html',
@@ -18,8 +18,9 @@ export class EmployeeTableComponent implements OnInit {
   employees:Employee[] = []; 
   nameField:string = "Add New";
   isCurrentlyUpdate:boolean=false;
-  constructor(public employeeService: EmployeeServiceService, public dialog: MatDialog) { }
-
+  constructor(public employeeService: EmployeeServiceService, private modalService: NgbModal) { }
+  closeResult = "";
+  
   ngOnInit(): void {
     this.getAllData();
   }
@@ -47,17 +48,33 @@ export class EmployeeTableComponent implements OnInit {
     this.newUpdateEmpEvent.emit(employee);
   }
 
-  deleteEmp(id:number){
-    this.employeeService.deleteEmp(id).subscribe((res) => {
-      if(res) {
-        // console.log("berhasil delete");
-        // console.log("currentlyUpdate EMP :"+this.isCurrentlyUpdate)
-        if(this.isCurrentlyUpdate) {
-          this.newDeleteEvent.emit()
-          this.isCurrentlyUpdate=false
+  deleteEmp(id:number, content: any){
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      // console.log(this.employeeForm.value)
+      this.employeeService.deleteEmp(id).subscribe((res) => {
+        if(res) {
+          // console.log("berhasil delete");
+          // console.log("currentlyUpdate EMP :"+this.isCurrentlyUpdate)
+          if(this.isCurrentlyUpdate) {
+            this.newDeleteEvent.emit()
+            this.isCurrentlyUpdate=false
+          }
+          this.getAllData();
         }
-        this.getAllData();
-      }
+      });
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 }

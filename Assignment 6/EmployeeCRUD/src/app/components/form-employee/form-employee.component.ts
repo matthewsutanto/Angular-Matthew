@@ -1,9 +1,8 @@
-import { Component, OnInit, Output, SimpleChange, EventEmitter, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Employee } from 'src/app/Modules/Employee';
 import { EmployeeServiceService } from 'src/app/services/employee-service.service';
-import { ModalModule } from './modal/modal.module';
 import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -85,7 +84,7 @@ export class FormEmployeeComponent implements OnInit {
     return this.employeeForm.get("title")
   }
 
-  get categoryOption() {
+  get Role() {
     return this.employeeForm.get("Role")
   }
 
@@ -178,7 +177,7 @@ export class FormEmployeeComponent implements OnInit {
     this.fName?.setValue(this.updateEmployee.firstName);
     this.lName?.setValue(this.updateEmployee.lastName);
     this.title?.setValue(this.updateEmployee.title);
-    this.categoryOption?.setValue(this.updateEmployee.role);
+    this.Role?.setValue(this.updateEmployee.role);
     this.email?.setValue(this.updateEmployee.email);
     this.password?.setValue(this.updateEmployee.password);
     this.passwordCon?.setValue(this.updateEmployee.confirmPassword);

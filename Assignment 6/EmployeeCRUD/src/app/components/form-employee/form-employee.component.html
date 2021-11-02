@@ -12,9 +12,8 @@
         />
         <label for="floatingFName">First Name</label>
       </div>
-
       <div class="alert" *ngIf="fName && fName.touched && fName.invalid">
-          <span style="color: red;" >Username input is error</span>
+          <span style="color: red;" >First Name input is not valid</span>
       </div>
     </div>
 
@@ -29,6 +28,9 @@
           placeholder="LName"
         />
         <label for="floatingLName">Last Name</label>
+      </div>
+      <div class="alert" *ngIf="lName && lName.touched && lName.invalid">
+        <span style="color: red;" >Last Name input is not valid</span>
       </div>
     </div>
   </div>
@@ -46,6 +48,9 @@
         />
         <label for="floatingTitle">Title</label>
       </div>
+      <div class="alert" *ngIf="title && title.touched && title.invalid">
+        <span style="color: red;" >Title input is not valid</span>
+      </div>
     </div>
 
     <div class="col-sm">
@@ -62,6 +67,9 @@
           <option value="User">User</option>
         </select>
       </div>
+      <div class="alert" *ngIf="Role && Role.touched && Role.invalid">
+        <span style="color: red;" >Role is not chosen yet</span>
+      </div>
     </div>
   </div>
 
@@ -76,6 +84,9 @@
         placeholder="Email"
       />
       <label for="floatingEmail">Email</label>
+    </div>
+    <div class="alert" *ngIf="email && email.touched && email.invalid">
+      <span style="color: red;" >Email is not chosen yet</span>
     </div>
   </div>
 
@@ -92,12 +103,13 @@
         />
         <label for="floatingPass">Password</label>
       </div>
+      <div class="alert" *ngIf="password && password.touched && password.invalid">
+        <span style="color: red;" >Password is not valid</span>
+      </div>
     </div>
 
     <div class="col-sm">
       <div class="form-floating mb-3">
-        <div class="col-sm">
-          <div class="form-floating mb-3">
             <input
               type="text"
               formControlName="confirmPassword"
@@ -107,8 +119,9 @@
               placeholder="PassCon"
             />
             <label for="floatingPassCon">Password Confirm</label>
-          </div>
-        </div>
+      </div>
+      <div class="alert" *ngIf="passwordCon && passwordCon.touched && passwordCon.invalid">
+        <span style="color: red;" >Password Confirmation is not valid</span>
       </div>
     </div>
   </div>

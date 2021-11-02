@@ -1,3 +1,7 @@
 tr:hover{
-    background-color: rgb(84, 121, 84);
+    background-color: rgb(46, 122, 221);
+}
+td{
+    width: 25px;
+    height: 12px;
 }
