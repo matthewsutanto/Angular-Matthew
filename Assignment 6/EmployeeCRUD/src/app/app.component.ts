@@ -45,7 +45,7 @@ export class AppComponent {
   }
 
   deleteEmpEvent(){
-    console.log("halo ada disini")
+    // console.log("halo ada disini")
     this.signDelete = true;
   }
 

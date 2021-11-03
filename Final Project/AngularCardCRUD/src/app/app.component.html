@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <app-form-card
+        (newFinishDeleteEvent)="finishDelete()"
+        (newCardEvent)="updateTable()"
+        [updateCard]="card"
+        [isDelete]="signDelete"
+      ></app-form-card>
+    </div>
+    <div class="col-sm">
+      <app-card-table
+        (newDeleteEvent)="deleteCardEvent()"
+        (newUpdateCardEvent)="updateCardEvent($event)"
+        (newUpdateTableEvent)="updateTableFinish()"
+        [isUpdate]="signUpdate"
+      ></app-card-table>
+    </div>
+  </div>
+</div>

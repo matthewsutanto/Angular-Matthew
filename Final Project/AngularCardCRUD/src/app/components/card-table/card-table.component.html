@@ -1,0 +1,54 @@
+<!-- <button type="button" class="btn btn-primary" (click)="openDialog()">Add New Employee</button> -->
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Card Owner</th>
+            <th scope="col">Card Number</th>
+            <th scope="col">Exp Date</th>
+            <th scope="col">Button</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let card of cards; let i = index">
+        <td scope="row">{{i+1}}</td>
+        <td>{{card.cardOwnerName}}</td>
+        <td>{{card.cardNumber}}</td>
+        <td>{{card.expirationDate}}</td>
+        <td>
+            <button class="btn btn-success btn-sm completed" (click)="newUpdateCard(card)">
+                <i class="bi bi-pencil"></i>
+            </button>
+        </td>
+        <td>
+            <button class="btn btn-danger btn-sm" (click)="deleteCard(card.paymentDetailsId, content)">
+                <i class="bi bi-trash-fill"></i>
+            </button>
+        </td>
+        <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Confirmation Box</h4>
+              <button
+                type="button"
+                class="close"
+                aria-label="Close"
+                (click)="modal.dismiss('Cross click')"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h1>Are you sure want to Delete {{card.cardOwnerName}} card ?</h1>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-outline-dark"
+                (click)="modal.close('Save click')"
+              >
+                Yes
+              </button>
+            </div>
+          </ng-template>
+    </tr>
+    
+</table>

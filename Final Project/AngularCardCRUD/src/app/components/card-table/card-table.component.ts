@@ -1,63 +1,57 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { Employee } from 'src/app/Modules/Employee';
-import { EmployeeServiceService } from 'src/app/services/employee-service.service';
+import { Component, Input, OnInit, SimpleChange, Output, EventEmitter } from '@angular/core';
+import { Card } from 'src/app/Modules/Card';
+import { CardService } from 'src/app/services/card.service';
 import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-employee-table',
-  templateUrl: './employee-table.component.html',
-  styleUrls: ['./employee-table.component.css']
+  selector: 'app-card-table',
+  templateUrl: './card-table.component.html',
+  styleUrls: ['./card-table.component.css']
 })
-export class EmployeeTableComponent implements OnInit {
+export class CardTableComponent implements OnInit {
   @Input() isUpdate:boolean=false;
   @Output() newUpdateTableEvent = new EventEmitter<any>();
-  @Output() newUpdateEmpEvent = new EventEmitter<Employee>();
+  @Output() newUpdateCardEvent = new EventEmitter<Card>();
   @Output() newDeleteEvent = new EventEmitter<any>();
-  
-  employees:Employee[] = []; 
+  cards: Card[] =[];
   nameField:string = "Add New";
   isCurrentlyUpdate:boolean=false;
-  constructor(public employeeService: EmployeeServiceService, private modalService: NgbModal) { }
   closeResult = "";
   
+  constructor(public cardService: CardService, private modalService:NgbModal) { }
+
   ngOnInit(): void {
     this.getAllData();
   }
 
   getAllData() {
-    this.employeeService
+    this.cardService
       .getAll()
-      .subscribe(employee => this.employees = employee);
+      .subscribe(card => this.cards = card);
   }
 
   ngDoCheck(){
-    if(this.isUpdate) {
+    if(this.isUpdate){
       this.getAllData();
       this.isCurrentlyUpdate=false
       this.newUpdateTableEvent.emit();
-      // this.isUpdate=false;
     }
-
-    // console.log("Check currentlyUpdate = "+this.isCurrentlyUpdate)
-    
   }
 
-  newUpdateEmp(employee:Employee){
+  newUpdateCard(card:Card){
     this.isCurrentlyUpdate = true;
-    this.newUpdateEmpEvent.emit(employee);
+    this.newUpdateCardEvent.emit(card);
   }
 
-  deleteEmp(id:number, content: any){
+  deleteCard(id:number, content:any){
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       // console.log(this.employeeForm.value)
-      this.employeeService.deleteEmp(id).subscribe((res) => {
+      this.cardService.deleteCard(id).subscribe((res) => {
         if(res) {
-          // console.log("berhasil delete");
-          // console.log("currentlyUpdate EMP :"+this.isCurrentlyUpdate)
+          console.log("berhasil delete");
           if(this.isCurrentlyUpdate) {
             this.newDeleteEvent.emit()
-            this.isCurrentlyUpdate=false
           }
           this.getAllData();
         }
@@ -66,6 +60,7 @@ export class EmployeeTableComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+    
   }
 
   private getDismissReason(reason: any): string {
@@ -77,4 +72,5 @@ export class EmployeeTableComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
 }

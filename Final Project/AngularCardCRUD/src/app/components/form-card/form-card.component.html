@@ -1,0 +1,73 @@
+<form [formGroup]="cardForm" (ngSubmit)="inputCard(content)">
+
+    <div class="row">
+        <div class="form-floating mb-3">
+            <input type="text" formControlName="cardOwnerName" class="form-control" name="floatingCardOwner" id="floatingCardOwner" placeholder="Card Owner Name">
+            <label for="floatingCardOwner">Card Owner Name</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm">
+            <div class="form-floating mb-3">
+                <input type="text" formControlName="cardNumber" class="form-control" name="floatingCardNumber" id="floatingCardNumber" placeholder="Card Number">
+                <label for="floatingCardNumber">Card Number</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm">
+            <div class="form-floating mb-3">
+                <input type="password" formControlName="securityCode" class="form-control" name="floatingSecurityCode" id="floatingSecurityCode" placeholder="Security Code">
+                <label for="floatingSecurityCode">Security Code</label>
+            </div>
+        </div>
+
+        <div class="col-sm">
+            <div class="form-floating mb-3">
+                <div class="col-sm">
+                    <div class="form-floating mb-3">
+                        <input type="text" formControlName="expirationDate" class="form-control" name="floatingExpDate" id="floatingExpDate" placeholder="PassCon">
+                        <label for="floatingExpDate">Expiration Date</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm">
+            <input type="submit" id="submitForm" value="{{btnName}}" class="btn btn-primary" [disabled]="!cardForm.valid"/>    
+        </div>
+        <!-- <div class="col-sm">
+            <input type="submit" id="submitForm" value="{{btnName}}" class="btn btn-primary" />    
+        </div> -->
+    </div>
+</form>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Confirmation Box</h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h1>Are you sure want to {{btnName}} ?</h1>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="modal.close('Save click')"
+      >
+        Yes {{btnName}}
+      </button>
+    </div>
+  </ng-template>
