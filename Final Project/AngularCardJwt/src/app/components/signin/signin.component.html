@@ -11,12 +11,20 @@
         </div>
         <div class="form-group mt-3">
             <label>Password</label>
-            <input type="password" class="form-control" formControlName="password" placeholder="Password" required>
+            <input (focusout) = "isValidate()" type="password" class="form-control" formControlName="password" placeholder="Password" required>
+            <span
+                *ngIf="password && password.touched && errors.password.required"
+                style="color: red"
+            >
+                Password is required
+            </span>
             <span style="color: red;"
-                *ngIf="password && password.touched && password.invalid">
-                Password is required. Min length is 5
+                *ngIf="errors.password.pattern">
+                Password need Alphanumeric character
             </span>
         </div>
         <button type="submit" class="btn btn-block btn-primary mt-3">Sign in</button>
+        
     </form>
+    <button type="submit" (click)="register()" class="btn btn-block btn-primary mt-3">Register</button>
 </div>

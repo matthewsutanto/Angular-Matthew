@@ -1,1 +1,37 @@
-<p>signup works!</p>
+<div class="auth-wrapper"> 
+
+    <form class="form-signin" [formGroup]="signupForm" (ngSubmit)="registerUser()">
+        <h3 class="h3 mb-3 font-weight-normal text-center">Please sign up</h3>
+        <div class="form-group mt-3">
+            <label>Username</label>
+            <input type="text" class="form-control" formControlName="username" placeholder="Enter username" required>
+            <span style="color: red;"
+                *ngIf="name && name.touched && name.invalid">
+                Username is required. Min length is 5
+            </span>
+        </div>
+        <div class="form-group mt-3">
+            <label>Email address</label>
+            <input type="email" class="form-control" formControlName="email" placeholder="Enter email" required>
+            <span style="color: red;"
+                *ngIf="email && email.touched && email.invalid">
+                Email is required. Must input email type
+            </span>
+        </div>
+        <div class="form-group mt-3">
+            <label>Password</label>
+            <input (focusout) = "isValidate()" type="password" class="form-control" formControlName="password" placeholder="Password">
+            <span
+                *ngIf="password && password.touched && errors.password.required"
+                style="color: red"
+            >
+                Password is required
+            </span>
+            <span style="color: red;"
+                *ngIf="errors.password.pattern">
+                Password need Alphanumeric character
+            </span>
+        </div>
+        <button type="submit" class="btn btn-block btn-primary mt-3">Sign up</button>
+    </form>
+</div>

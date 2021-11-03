@@ -1,8 +1,10 @@
-import { Component, Input, OnInit, SimpleChange, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, SimpleChange, Output, EventEmitter } from '@angular/core';
 import { Card } from 'src/app/modules/Card';
 import { CardService } from 'src/app/services/card/card.service';
 import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-card-table',
@@ -14,21 +16,38 @@ export class CardTableComponent implements OnInit {
   @Output() newUpdateTableEvent = new EventEmitter<any>();
   @Output() newUpdateCardEvent = new EventEmitter<Card>();
   @Output() newDeleteEvent = new EventEmitter<any>();
+  
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   cards: Card[] =[];
   nameField:string = "Add New";
   isCurrentlyUpdate:boolean=false;
   closeResult = "";
+  displayedColumns= ["cardOwnerName","cardNumber","expirationDate", "action"]
+
+  dataSource = new MatTableDataSource<Card>(this.cards);
   
-  constructor(public cardService: CardService, private modalService:NgbModal) { }
+  constructor(public cardService: CardService, private modalService:NgbModal) {
+    
+  }
 
   ngOnInit(): void {
     this.getAllData();
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
   getAllData() {
     this.cardService
       .getAll()
-      .subscribe(card => this.cards = card);
+      .subscribe(
+        card => {
+          this.dataSource.data = card
+          this.dataSource.paginator = this.paginator
+        });
+    
   }
 
   ngDoCheck(){
@@ -49,6 +68,7 @@ export class CardTableComponent implements OnInit {
       // console.log(this.employeeForm.value)
       this.cardService.deleteCard(id).subscribe((res) => {
         if(res) {
+          alert("Success to delete a card")
           // console.log("berhasil delete");
           if(this.isCurrentlyUpdate) {
             this.newDeleteEvent.emit()

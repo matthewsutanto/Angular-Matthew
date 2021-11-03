@@ -1,10 +1,11 @@
-import { Component, OnInit, Output, SimpleChange, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, SimpleChange, EventEmitter, Input, Injectable, TemplateRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Card } from 'src/app/modules/Card';
 import { CardService } from 'src/app/services/card/card.service';
 import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-form-card',
@@ -37,12 +38,28 @@ export class FormCardComponent implements OnInit {
   isUpdate: boolean = false;
   idCardUpdate: number = -1;
   btnName: string = "Add New Card";
+  toasts: any[] = [];
 
-  constructor(public cardService: CardService, private modalService:NgbModal) { 
+  constructor(public cardService: CardService, private modalService:NgbModal, private _snackBar: MatSnackBar) { 
     this.dateModel= {
       year:0,
       month:0,
       day:0
+    }
+  }
+
+  errors:any = {
+    "cardOwnerName" : {
+
+    },
+    "cardNumber" : {
+
+    },
+    "securityCode": {
+
+    },
+    "expirationDate": {
+
     }
   }
 
@@ -106,6 +123,8 @@ export class FormCardComponent implements OnInit {
           }
           this.cardService.newCard(this.cardInput).subscribe((res) => {
             if (res) {
+              // this.showToastNew()
+              alert("Success to add new card");
               this.cardForm.reset();
               // console.log("berhasil")
               this.newCardEvent.emit();
@@ -120,11 +139,14 @@ export class FormCardComponent implements OnInit {
             "expirationDate": strDate,
             "securityCode": this.securityCode?.value
           }
+          console.log(this.cardInput)
+          console.log(this.idCardUpdate)
           // console.log(this.cardInput)
           this.cardService.updateCard(this.cardInput, this.idCardUpdate).subscribe((res) => {
             if (res) {
               this.cardForm.reset();
               // console.log("berhasil update")
+              alert("Success to update a card");
               this.newCardEvent.emit();
               this.idCardUpdate = -1;
               this.isUpdate = false;
@@ -198,6 +220,20 @@ export class FormCardComponent implements OnInit {
       return 'by clicking on a backdrop';
     } else {
       return `with: ${reason}`;
+    }
+  }
+
+  validate() {
+    if(this.cardOwnerName?.invalid || this.cardNumber?.invalid || this.securityCode?.invalid || this.expirationDate?.invalid) {
+      this.errors.cardOwnerName = {...this.cardOwnerName?.errors}
+      this.errors.cardNumber = {...this.cardNumber?.errors}
+      this.errors.securityCode = {...this.securityCode?.errors}
+      this.errors.expirationDate = {...this.expirationDate?.errors}
+    }else{
+      this.errors.cardOwnerName = {}
+      this.errors.cardNumber = {}
+      this.errors.securityCode = {}
+      this.errors.expirationDate = {}
     }
   }
 }

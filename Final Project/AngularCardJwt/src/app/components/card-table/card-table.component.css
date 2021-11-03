@@ -1,0 +1,22 @@
+td{
+    height: 40px;
+}
+.cardOwner{
+    width: 170px;
+    text-align: center;
+}
+
+.cardNumber{
+    width: 150px;
+    text-align: center;
+}
+
+.expDate{
+    width: 130px;
+    text-align: center;
+}
+
+.actionBut{
+    width: 120px;
+    text-align: center;
+}

@@ -1,6 +1,6 @@
 <!-- <button type="button" class="btn btn-primary" (click)="openDialog()">Add New Employee</button> -->
 <h3>Customer Card List</h3>
-<table class="table">
+<!-- <table class="table">
     <thead>
         <tr>
             <th scope="col">No.</th>
@@ -52,4 +52,71 @@
           </ng-template>
     </tr>
     
+</table> -->
+
+<table mat-table [dataSource]="dataSource">
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="cardOwnerName">
+    <th class="cardOwner" mat-header-cell *matHeaderCellDef> Card Owner Name </th>
+    <td class="cardOwner" mat-cell *matCellDef="let element"> {{element.cardOwnerName}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="cardNumber">
+    <th class="cardNumber" mat-header-cell *matHeaderCellDef> Card Number </th>
+    <td class="cardNumber" mat-cell *matCellDef="let element"> {{element.cardNumber}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="expirationDate">
+    <th class="expDate" mat-header-cell *matHeaderCellDef> Expiration Date </th>
+    <td class="expDate" mat-cell *matCellDef="let element"> {{element.expirationDate | date:'dd-MMM-yyyy'}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="action">
+    <th class="actionBut" mat-header-cell *matHeaderCellDef> Action </th>
+    <td class="actionBut" mat-cell *matCellDef="let element"> 
+        <button class="btn btn-success btn-sm completed" (click)="newUpdateCard(element)">
+            <i class="bi bi-pencil"></i>
+        </button>
+        <button class="btn btn-danger btn-sm" (click)="deleteCard(element.paymentDetailsId, content)">
+            <i class="bi bi-trash-fill"></i>
+        </button>
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Confirmation Box</h4>
+            <button
+              type="button"
+              class="close"
+              aria-label="Close"
+              (click)="modal.dismiss('Cross click')"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure want to Delete {{element.cardOwnerName}} card ?</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-dark"
+              (click)="modal.close('Save click')"
+            >
+              Yes
+            </button>
+          </div>
+        </ng-template>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]"
+               showFirstLastButtons 
+               aria-label="Select page of card list">
+</mat-paginator>

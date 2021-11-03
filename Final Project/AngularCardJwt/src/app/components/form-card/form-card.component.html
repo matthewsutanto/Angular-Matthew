@@ -10,9 +10,44 @@
           name="floatingCardOwner"
           id="floatingCardOwner"
           placeholder="Card Owner Name"
+          (focusout)="validate()"
         />
         <label for="floatingCardOwner">Card Owner Name</label>
       </div>
+      <span
+        *ngIf="
+          cardOwnerName &&
+          cardOwnerName.touched &&
+          errors.cardOwnerName.required
+        "
+        style="color: red"
+      >
+        Card Owner Name required
+      </span>
+      <span
+        *ngIf="
+          cardOwnerName && cardOwnerName.touched && errors.cardOwnerName.pattern
+        "
+        style="color: red"
+      >
+        Input only char
+      </span>
+      <span
+        *ngIf="
+          cardOwnerName &&
+          cardOwnerName.touched &&
+          errors.cardOwnerName.minlength
+        "
+        style="color: red"
+      >
+        Minimum input is 3 character
+      </span>
+      <!-- <span
+            *ngIf="errors.inputTodo.required"
+            style="color: red"
+          >
+            Input a text
+          </span> -->
     </div>
   </div>
 
@@ -26,9 +61,33 @@
           name="floatingCardNumber"
           id="floatingCardNumber"
           placeholder="Card Number"
+          (focusout)="validate()"
         />
         <label for="floatingCardNumber">Card Number</label>
       </div>
+
+      <span
+        *ngIf="cardNumber && cardNumber.touched && errors.cardNumber.required"
+        style="color: red"
+      >
+        Card Number required
+      </span>
+      <span
+        *ngIf="cardNumber && cardNumber.touched && errors.cardNumber.pattern"
+        style="color: red"
+      >
+        Input only number
+      </span>
+      <span
+        *ngIf="
+          cardNumber &&
+          cardNumber.touched &&
+          (errors.cardNumber.minlength || errors.cardNumber.maxlength)
+        "
+        style="color: red"
+      >
+        Input only 16 character
+      </span>
     </div>
   </div>
 
@@ -42,39 +101,69 @@
           name="floatingSecurityCode"
           id="floatingSecurityCode"
           placeholder="Security Code"
+          (focusout)="validate()"
         />
         <label for="floatingSecurityCode">Security Code</label>
+        <span
+          *ngIf="
+            securityCode && securityCode.touched && errors.securityCode.required
+          "
+          style="color: red"
+        >
+          Security code is required
+        </span>
+        <span
+          *ngIf="
+            securityCode && securityCode.touched && errors.securityCode.pattern
+          "
+          style="color: red"
+        >
+          Input only number
+        </span>
+        <span
+          *ngIf="
+            securityCode &&
+            securityCode.touched &&
+            (errors.securityCode.minlength || errors.securityCode.maxlength)
+          "
+          style="color: red"
+        >
+          Input only 3 character
+        </span>
       </div>
     </div>
 
     <div class="col-sm">
-      <div class="form-floating mb-3">
-        <div class="col-sm">
-          <div class="form-floating mb-3">
-            <div class="input-group">
-              <div class="form-floating mb-3">
-                <input
-                  class="form-control"
-                  placeholder="yyyy-mm-dd"
-                  id="floatingExpiration"
-                  name="dp"
-                  formControlName="expirationDate"
-                  ngbDatepicker
-                  #d="ngbDatepicker"
-                />
-                <label for="floatingExpiration">ExpirationDate</label>
-              </div>
-              <div class="input-group-append">
-                <button
-                  class="btn btn-outline-secondary calendar"
-                  (click)="d.toggle()"
-                  type="button"
-                >
-                  <i class="bi bi-calendar"></i>
-                </button>
-              </div>
-            </div>
-          </div>
+      <div class="input-group">
+        <div class="form-floating mb-3">
+          <input
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            id="floatingExpiration"
+            name="dp"
+            formControlName="expirationDate"
+            ngbDatepicker
+            #d="ngbDatepicker"
+            (focustout) = "validate()"
+          />
+          <label for="floatingExpiration">ExpirationDate</label>
+          <span
+          *ngIf="
+            expirationDate && expirationDate.touched && errors.expirationDate.required
+          "
+            style="color: red"
+          >
+            Expiration Date is required
+          </span>
+        </div>
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary calendar"
+            (click)="d.toggle()"
+            type="button"
+          >
+            <i class="bi bi-calendar"></i>
+          </button>
         </div>
       </div>
     </div>

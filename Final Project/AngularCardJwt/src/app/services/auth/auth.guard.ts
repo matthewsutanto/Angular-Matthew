@@ -16,24 +16,13 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log(sessionStorage.getItem('access_token'))
-      if (this.isLoggedIn) {
+      // console.log(sessionStorage.getItem('access_token'))
+      if (sessionStorage.getItem('access_token')==null) {
         window.alert("Access not allowed");
         this.router.navigate(['login'])
       }
       return true;
   }
-
-  get isLoggedIn():boolean {
   
-    if(sessionStorage.getItem('access_token')!=null){
-      console.log("invalid")
-      return false;
-    }else {
-      return true
-    }
-
-    // return (authToken !== undefined) ? true : false;
-  }
   
 }

@@ -13,6 +13,11 @@ import { CardTableComponent } from './components/card-table/card-table.component
 import { FormCardComponent } from './components/form-card/form-card.component';
 import { AuthInterceptorService } from './services/auth/auth-interceptor.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar'; 
 
 @NgModule({
   declarations: [
@@ -22,7 +27,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PageNoFoundComponent,
     HomepageComponent,
     CardTableComponent,
-    FormCardComponent
+    FormCardComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +36,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi:true}

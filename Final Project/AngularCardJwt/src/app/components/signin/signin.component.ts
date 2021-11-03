@@ -11,15 +11,23 @@ import { Router } from '@angular/router';
 export class SigninComponent implements OnInit {
 
   constructor(public authService: AuthService, public router:Router) { }
-
   signinForm = new FormGroup({
     password: new FormControl('', [
       Validators.required,
-      Validators.minLength(5)
+      Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
     ]),
 
     email: new FormControl('', [Validators.required, Validators.email])
   })
+
+  errors:any = {
+    "password" : {
+
+    },
+    "email" : {
+
+    }
+  }
 
   get password(){
     return this.signinForm.get('password')
@@ -45,6 +53,18 @@ export class SigninComponent implements OnInit {
       //     alert(err)
       //   }
       // )
+  }
+
+  register(){
+    this.router.navigate(['signup']);
+  }
+
+  isValidate() {
+    if(this.password?.invalid) {
+      this.errors.password = {...this.password?.errors}
+    }else{
+      this.errors.password = {}
+    }
   }
 
 }

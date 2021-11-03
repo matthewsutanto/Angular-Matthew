@@ -9,7 +9,7 @@ import { Card } from 'src/app/modules/Card';
 })
 export class CardService {
 
-  endpoint: string = 'http://localhost:5000/api';
+  endpoint: string = 'http://final-project-matthew.herokuapp.com/api';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentCard: {
     paymentDetailsId: number;
