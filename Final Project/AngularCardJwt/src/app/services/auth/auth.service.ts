@@ -25,7 +25,7 @@ export class AuthService {
     return this.http
             .post(api, user)
             .subscribe((res: any) => {
-                console.log(res);
+                // console.log(res);
                 alert("Silahkan login untuk ke menu card management")
                 this.router.navigate(['login']);
              },

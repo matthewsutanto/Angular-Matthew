@@ -139,8 +139,8 @@ export class FormCardComponent implements OnInit {
             "expirationDate": strDate,
             "securityCode": this.securityCode?.value
           }
-          console.log(this.cardInput)
-          console.log(this.idCardUpdate)
+          // console.log(this.cardInput)
+          // console.log(this.idCardUpdate)
           // console.log(this.cardInput)
           this.cardService.updateCard(this.cardInput, this.idCardUpdate).subscribe((res) => {
             if (res) {

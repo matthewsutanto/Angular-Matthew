@@ -32,6 +32,6 @@
                 Password need Alphanumeric character
             </span>
         </div>
-        <button type="submit" class="btn btn-block btn-primary mt-3">Sign up</button>
+        <button type="submit" [disabled]="!signupForm.valid" class="btn btn-block btn-primary mt-3">Sign up</button>
     </form>
 </div>
